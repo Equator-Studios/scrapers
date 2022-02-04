@@ -33,8 +33,10 @@ folder can be made next to the existing `scrapers` folder and project will
 only load what is in the text folder if available.
 
 # Running the project
-With a sufficiently up to date node/npm running `npm start` from within the 
-terminal should be enough.  
+After cloning the repository, you must install the dependencies. We use npm
+or other compatible package managers. More details below. To install the
+dependencies run `npm install`. After which with a sufficiently up to date
+node/npm running `npm start` from within the terminal should be enough.
 
 To install nodejs/npm for linux distributions, use
 the package manager that your distribution provides. Details are available at
