@@ -7,7 +7,7 @@ way to grap how this works, we simply have a callback funciton that takes three
 paramaters:
 
 1. a database object - this must be passed through (is only used in our real
-deployment and not in this example)
+deployment and not in the shim we use specifically for this project)
 2. the name of the datascraper which needs to be unique across all our data
 scrapers
 3. A async callback function that should return an array with the metadata that
@@ -15,9 +15,9 @@ our systems will use to download the data and process it. Here is the metadata
 that it accepts:
 	- required: URL - the actual url that the shapefile is available at
 	- required: updated - last time the data was updated. This lets us know when
+	to re-process the data and update the listing within the search tool.
 	- required: name - the name of the particual dataset. This name is shown
 	to users.
-	we need to re-process the data.
 	- optional: created - when the data was first hosted by the data provider
 	- optional: description - a description of the data. Proper due diligance
 	in terms of attribution is required, so technically not a "optional" field
@@ -30,7 +30,8 @@ need to touch any code since scapers will automatically be registered and ran
 with the index.js testing script. As a bonus developer friendly feature, to
 avoid running other scrapers when the intention is to test a new one, a `test`
 folder can be made next to the existing `scrapers` folder and project will
-only load what is in the text folder if available.
+only load what is in the text folder if available. When creating the PR, make
+sure to move the finished scraper from the test folder into the scrapers folder.
 
 # Running the project
 After cloning the repository, you must install the dependencies. We use npm
