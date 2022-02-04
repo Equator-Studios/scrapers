@@ -1,9 +1,8 @@
 import fetch from "node-fetch";
-import Scraper from '../Scraper.mjs';
 import cheerio from 'cheerio';
 
-export default ({ database }) => {
-	return Scraper (database, 'RedDeer', async () => {
+export default ({ database, DataScraper }) => {
+	return DataScraper (database, 'RedDeer', async () => {
 		let data = [];
 
 		let body = await (await fetch("https://data.reddeer.ca/datasets")).text();

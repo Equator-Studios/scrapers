@@ -1,6 +1,41 @@
 import nodefs from 'fs';
-import {database, scrapers, returnObj} from './Scraper.mjs';
 const fs = nodefs.promises;
+
+const names = new Set();
+const database = {};
+const returnObj = {};
+const scrapers = [];
+
+const DataScraper = (...args) => {
+	if (args.length !== 3) {
+		throw new Error ("The scraper function must be given 3 paramaters");
+	}
+
+	const [db, name, callback] = args;
+	if (database !== db) {
+		throw new Error("The database object must be sent through");
+	}
+
+	if (typeof name !== 'string') {
+		throw new Error("The name paramater must be a string");
+	}
+
+	if (names.has(name)) {
+		throw new Error("That name is already used by another data scraper");
+	}else{
+		names.add(name);
+	}
+
+	if (typeof callback !== 'function') {
+		throw new Error("The callback must be a function");
+	}
+
+	scrapers.push({
+		name, callback
+	});
+
+	return returnObj;
+}
 
 const loadScrapers = async (folder, scrapers) => {
 	for (const scraperName of scrapers) {
@@ -10,7 +45,7 @@ const loadScrapers = async (folder, scrapers) => {
 			throw new Error(`${scraperName} must export a function as its default export`);
 		}
 
-		if (scraper.default({database}) !== returnObj) {
+		if (scraper.default({database, DataScraper}) !== returnObj) {
 			throw new Error("The scraper default function export must pass through the return value of Scraper.mjs");
 		}
 	}
