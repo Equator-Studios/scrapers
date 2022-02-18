@@ -23,6 +23,9 @@ that it accepts:
 	in terms of attribution is required, so technically not a "optional" field
 	in accordance to law. The description field is shown to users if available.
 	The description can contain html.
+	- optional: tags - a data provider may provide a list of tags that can be
+	used to more easily look for a class of shapefiles be that roads, parcels
+	or addresses 
 
 # Project layout
 Any new datascrapers should go into the scrapers folder. New scrapers shouldn't

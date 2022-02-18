@@ -83,6 +83,8 @@ const loadFolder = async (folder) => {
 				if (typeof entry.name !== 'string') throw new Error("One or more entries returned did not have a valid name");
 				if (typeof entry.url !== 'string') throw new Error("One or more entries returned did not have a valid url");
 				if ('description' in entry && typeof entry.description !== 'string') throw new Error("One or more entries returned did not have a valid description");
+				if ('tags' in entry && !Array.isArray(entry.tags)) throw new Error("the tags property must be an array");
+				if ('tags' in entry && tags.entry.find(e => typeof e !== 'string')) throw new Error("the tags property must be an array of strings");
 			} catch (e) {
 				console.log('Suspect data:', entry);
 
