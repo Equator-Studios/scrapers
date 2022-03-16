@@ -2,10 +2,12 @@ lockfileVersion: 5.3
 
 specifiers:
   cheerio: ^1.0.0-rc.10
+  moment: ^2.29.1
   node-fetch: ^3.2.0
 
 dependencies:
   cheerio: 1.0.0-rc.10
+  moment: 2.29.1
   node-fetch: 3.2.0
 
 packages:
@@ -110,6 +112,10 @@ packages:
       domhandler: 4.3.0
       domutils: 2.8.0
       entities: 2.2.0
+    dev: false
+
+  /moment/2.29.1:
+    resolution: {integrity: sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==}
     dev: false
 
   /node-domexception/1.0.0:

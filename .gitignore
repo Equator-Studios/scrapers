@@ -102,3 +102,16 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Misc
+.DS_Store
