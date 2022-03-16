@@ -34,7 +34,7 @@ export default ({ database, DataScraper }) => {
       links: { content },
     } = shapesfile;
 
-    const updated = moment(lastModified, "YYYY-MM-DDTHH:mm:ss.SSSSZ").unix();
+    const updated = moment(lastModified, "YYYY-MM-DDThh:mm:ss.SSSSZ").unix();
 
     results.push({
       url: content,

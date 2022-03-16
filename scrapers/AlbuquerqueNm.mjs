@@ -23,8 +23,6 @@ export default ({ database, DataScraper }) => {
           "href"
         ) || "Not available";
 
-      console.log(url);
-
       return results.push({
         url,
         updated: 0,

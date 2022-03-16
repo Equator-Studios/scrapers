@@ -2,10 +2,10 @@ import fetch from "node-fetch";
 import moment from "moment";
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "DetroitMi", async () => {
+  return DataScraper(database, "AtlantaGa", async () => {
     const results = [];
     const baseUrl =
-      "https://opendata.arcgis.com/api/v3/datasets/9ca25373d4f747be85850344186dda3c_0";
+      "https://opendata.arcgis.com/api/v3/datasets/8cae9e82135d4bd0925f8c5e71254924_0";
     const request = await fetch(baseUrl);
     const response = await request.json();
     const requestDownload = await fetch(`${baseUrl}/downloads`);
