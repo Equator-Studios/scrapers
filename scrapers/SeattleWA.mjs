@@ -1,9 +1,9 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "SeattleWA", async () => {
+  return DataScraper(database, 'SeattleWA', async () => {
     const results = [];
-    const baseUrl = "https://data.seattle.gov";
+    const baseUrl = 'https://data.seattle.gov';
     const request = await fetch(`${baseUrl}/api/views/r37k-i652`);
     const response = await request.json();
 
@@ -14,13 +14,11 @@ export default ({ database, DataScraper }) => {
       name,
       metadata: { additionalAccessPoints },
     } = response;
-    const [shapefile] = additionalAccessPoints.filter(
-      (item) => item.title === "Shapefile"
-    );
+    const [shapefile] = additionalAccessPoints.filter(item => item.title === 'Shapefile');
     const { urls } = shapefile;
-    const url = urls["application/zip"];
+    const url = urls['application/zip'];
 
-    const sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, "");
+    const sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
 
     results.push({
       url,

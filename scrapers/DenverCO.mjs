@@ -1,25 +1,23 @@
-import fetch from "node-fetch";
-import cheerio from "cheerio";
-import moment from "moment";
+import fetch from 'node-fetch';
+import cheerio from 'cheerio';
+import moment from 'moment';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "DenverCO", async () => {
+  return DataScraper(database, 'DenverCO', async () => {
     const results = [];
-    const baseUrl = "https://www.denvergov.org";
-    const request = await fetch(
-      `${baseUrl}/opendata/dataset/city-and-county-of-denver-parcels`
-    );
+    const baseUrl = 'https://www.denvergov.org';
+    const request = await fetch(`${baseUrl}/opendata/dataset/city-and-county-of-denver-parcels`);
     const response = await request.text();
     const $ = cheerio.load(response);
-    const updatedString = $(".tagline").text().trim();
-    const description = $(".notes > p").text();
-    const resources = $("a[data-resource]");
-    const [text, date] = updatedString.split("Last updated");
-    const updated = moment(date, "M/D/YYYY").unix();
+    const updatedString = $('.tagline').text().trim();
+    const description = $('.notes > p').text();
+    const resources = $('a[data-resource]');
+    const [text, date] = updatedString.split('Last updated');
+    const updated = moment(date, 'M/D/YYYY').unix();
 
     resources.map((index, elem) => {
-      const name = $(elem).attr("data-resource");
-      const url = $(elem).attr("href");
+      const name = $(elem).attr('data-resource');
+      const url = $(elem).attr('href');
       return results.push({
         url,
         updated,

@@ -1,9 +1,9 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "NewYorkCityNY", async () => {
+  return DataScraper(database, 'NewYorkCityNY', async () => {
     const results = [];
-    const baseUrl = "https://data.cityofnewyork.us";
+    const baseUrl = 'https://data.cityofnewyork.us';
     const request = await fetch(`${baseUrl}/api/views/smk3-tmxj`);
     const response = await request.json();
 

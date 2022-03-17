@@ -1,11 +1,11 @@
-import fetch from "node-fetch";
-import moment from "moment";
+import fetch from 'node-fetch';
+import moment from 'moment';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "FerndaleMi", async () => {
+  return DataScraper(database, 'FerndaleMi', async () => {
     const results = [];
     const baseUrl =
-      "https://opendata.arcgis.com/api/v3/datasets/ebc18573de2d4721b51a0fb9e3b68635_0";
+      'https://opendata.arcgis.com/api/v3/datasets/ebc18573de2d4721b51a0fb9e3b68635_0';
     const request = await fetch(baseUrl);
     const response = await request.json();
     const requestDownload = await fetch(`${baseUrl}/downloads`);
@@ -17,12 +17,12 @@ export default ({ database, DataScraper }) => {
 
     const { data } = responseDownload;
 
-    const [shapesfile] = data.filter((item) => {
+    const [shapesfile] = data.filter(item => {
       const {
         attributes: { format },
       } = item;
 
-      if (format === "shp") {
+      if (format === 'shp') {
         return item;
       }
     });
@@ -32,7 +32,7 @@ export default ({ database, DataScraper }) => {
       links: { content },
     } = shapesfile;
 
-    const updated = moment(lastModified, "YYYY-MM-DDThh:mm:ss.SSSSZ").unix();
+    const updated = moment(lastModified, 'YYYY-MM-DDThh:mm:ss.SSSSZ').unix();
 
     results.push({
       url: content,

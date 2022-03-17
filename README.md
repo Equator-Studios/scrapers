@@ -15,21 +15,19 @@ paramaters:
    our systems will use to download the data and process it. Here is the metadata
    that it accepts:
 
-```text
 - required: URL - the actual url that the shapefile is available at
 - required: updated - last time the data was updated. This lets us know when
-to re-process the data and update the listing within the search tool.
+  to re-process the data and update the listing within the search tool.
 - required: name - the name of the particual dataset. This name is shown
-to users.
+  to users.
 - optional: created - when the data was first hosted by the data provider
 - optional: description - a description of the data. Proper due diligance
-in terms of attribution is required, so technically not a "optional" field
-in accordance to law. The description field is shown to users if available.
-The description can contain html.
+  in terms of attribution is required, so technically not a "optional" field
+  in accordance to law. The description field is shown to users if available.
+  The description can contain html.
 - optional: tags - a data provider may provide a list of tags that can be
-used to more easily look for a class of shapefiles be that roads, parcels
-or addresses
-```
+  used to more easily look for a class of shapefiles be that roads, parcels
+  or addresses
 
 # Project layout
 

@@ -1,9 +1,9 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "SantaMonicaCa", async () => {
+  return DataScraper(database, 'SantaMonicaCa', async () => {
     const results = [];
-    const baseUrl = "https://data.smgov.net/api/views/sa4y-7yah";
+    const baseUrl = 'https://data.smgov.net/api/views/sa4y-7yah';
     const request = await fetch(baseUrl);
     const response = await request.json();
 

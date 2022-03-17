@@ -1,9 +1,9 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "ProvidenceRi", async () => {
+  return DataScraper(database, 'ProvidenceRi', async () => {
     const results = [];
-    const baseUrl = "https://data.providenceri.gov";
+    const baseUrl = 'https://data.providenceri.gov';
     const request = await fetch(`${baseUrl}/api/views/ynak-nf84`);
     const response = await request.json();
 

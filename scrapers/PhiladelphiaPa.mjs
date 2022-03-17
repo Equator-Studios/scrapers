@@ -1,24 +1,24 @@
-import fetch from "node-fetch";
-import cheerio from "cheerio";
-import moment from "moment";
+import fetch from 'node-fetch';
+import cheerio from 'cheerio';
+import moment from 'moment';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "PhiladelphiaPa", async () => {
+  return DataScraper(database, 'PhiladelphiaPa', async () => {
     const results = [];
-    const baseUrl = "https://www.opendataphilly.org";
+    const baseUrl = 'https://www.opendataphilly.org';
     const request = await fetch(`${baseUrl}/dataset/property-parcels`);
     const response = await request.text();
     const $ = cheerio.load(response);
 
-    const datasetResources = $("#dataset-resources li");
-    const description = $(".notes p").text();
-    const [date] = $(".automatic-local-datetime").text().trim().split("(UTC");
+    const datasetResources = $('#dataset-resources li');
+    const description = $('.notes p').text();
+    const [date] = $('.automatic-local-datetime').text().trim().split('(UTC');
 
-    const created = moment(date, "MMMM D, YYYY, H").unix();
+    const created = moment(date, 'MMMM D, YYYY, H').unix();
 
     datasetResources.map((index, elem) => {
-      const href = $(elem).find("a.heading").attr("href");
-      const name = $(elem).find("a.heading").attr("title");
+      const href = $(elem).find('a.heading').attr('href');
+      const name = $(elem).find('a.heading').attr('title');
       const url = `${baseUrl}/${href}`;
       if (href !== undefined) {
         return results.push({

@@ -1,32 +1,30 @@
-import fetch from "node-fetch";
-import cheerio from "cheerio";
-import moment from "moment";
+import fetch from 'node-fetch';
+import cheerio from 'cheerio';
+import moment from 'moment';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "PittsburghPa", async () => {
+  return DataScraper(database, 'PittsburghPa', async () => {
     const results = [];
-    const baseUrl = "https://data.wprdc.org";
-    const request = await fetch(
-      `${baseUrl}/dataset/allegheny-county-parcel-boundaries1`
-    );
+    const baseUrl = 'https://data.wprdc.org';
+    const request = await fetch(`${baseUrl}/dataset/allegheny-county-parcel-boundaries1`);
     const response = await request.text();
     const $ = cheerio.load(response);
 
-    const datasetResources = $("#dataset-resources li");
-    const description = $(".notes p").text();
+    const datasetResources = $('#dataset-resources li');
+    const description = $('.notes p').text();
     const createdString = $(
-      "section.additional-info > table > tbody > tr:nth-child(4) > td"
+      'section.additional-info > table > tbody > tr:nth-child(4) > td'
     ).text();
     const updatedString = $(
-      "section.additional-info > table > tbody > tr:nth-child(5) > td"
+      'section.additional-info > table > tbody > tr:nth-child(5) > td'
     ).text();
 
-    const created = moment(createdString, "MMMM D, YYYY, hh:mm A").unix();
-    const updated = moment(updatedString, "MMMM D, YYYY, hh:mm A").unix();
+    const created = moment(createdString, 'MMMM D, YYYY, hh:mm A').unix();
+    const updated = moment(updatedString, 'MMMM D, YYYY, hh:mm A').unix();
 
     datasetResources.map((index, elem) => {
-      const href = $(elem).find("a.heading").attr("href");
-      const name = $(elem).find("a.heading").attr("title");
+      const href = $(elem).find('a.heading').attr('href');
+      const name = $(elem).find('a.heading').attr('title');
       const url = `${baseUrl}/${href}`;
       if (href !== undefined) {
         return results.push({

@@ -1,9 +1,9 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "BatonRougeLa", async () => {
+  return DataScraper(database, 'BatonRougeLa', async () => {
     const results = [];
-    const baseUrl = "https://data.brla.gov/api/views/re5c-hrw9";
+    const baseUrl = 'https://data.brla.gov/api/views/re5c-hrw9';
     const request = await fetch(baseUrl);
     const response = await request.json();
 

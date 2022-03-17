@@ -1,9 +1,9 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "RichmondVa", async () => {
+  return DataScraper(database, 'RichmondVa', async () => {
     const results = [];
-    const baseUrl = "https://data.richmondgov.com/api/views/b52i-7ygb";
+    const baseUrl = 'https://data.richmondgov.com/api/views/b52i-7ygb';
     const request = await fetch(baseUrl);
     const response = await request.json();
 

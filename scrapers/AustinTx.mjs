@@ -1,9 +1,9 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, "AustinTx", async () => {
+  return DataScraper(database, 'AustinTx', async () => {
     const results = [];
-    const baseUrl = "https://data.austintexas.gov";
+    const baseUrl = 'https://data.austintexas.gov';
     const request = await fetch(`${baseUrl}/api/views/f5rm-df6x`);
     const response = await request.json();
 
