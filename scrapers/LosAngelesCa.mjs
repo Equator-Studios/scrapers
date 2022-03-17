@@ -6,7 +6,7 @@ export default ({ database, DataScraper }) => {
     const results = [];
     const baseUrl = "https://data.lacity.org";
     const request = await fetch(
-      `${baseUrl}/browse?q=parcel&sortBy=relevance&limit=1000`
+      `${baseUrl}/browse?q=parcels&sortBy=relevance&limit=1000`
     );
     const response = await request.text();
     const $ = cheerio.load(response);
@@ -22,7 +22,6 @@ export default ({ database, DataScraper }) => {
       if (text.match(/parcel/gi)) {
         const id = href.substring(href.lastIndexOf("/") + 1, href.length);
         urls.push(`${baseUrl}/api/views/${id}`);
-        console.log(`${baseUrl}/api/views/${id}`);
       }
     });
 

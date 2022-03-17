@@ -6,7 +6,7 @@ export default ({ database, DataScraper }) => {
     const results = [];
     const baseUrl = "https://datacatalog.cookcountyil.gov";
     const request = await fetch(
-      `${baseUrl}/browse?q=Parcel&sortBy=relevance&limit=1000`
+      `${baseUrl}/browse?q=parcels&sortBy=relevance&limit=1000`
     );
     const response = await request.text();
     const $ = cheerio.load(response);
