@@ -34,6 +34,12 @@ export default ({ database, DataScraper }) => {
     dataset.map(data => {
       const { id, createdAt, viewLastModified, description, name, viewType } = data;
 
+      let sanitizeDescriptionHtml = '';
+
+      if (description) {
+        sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
+      }
+
       let url = '';
       switch (viewType) {
         case 'geo':
@@ -46,11 +52,11 @@ export default ({ database, DataScraper }) => {
           break;
       }
       results.push({
-        url,
-        updated: viewLastModified,
-        created: createdAt,
-        description,
-        name,
+        url: url || '',
+        updated: viewLastModified || 0,
+        created: createdAt || 0,
+        description: sanitizeDescriptionHtml || '',
+        name: name || '',
       });
     });
 

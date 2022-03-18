@@ -12,8 +12,14 @@ export default ({ database, DataScraper }) => {
     const responseDownload = await requestDownload.json();
 
     const {
-      attributes: { created, snippet },
+      attributes: { description, created, snippet },
     } = response.data;
+
+    let sanitizeDescriptionHtml = '';
+
+    if (description) {
+      sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
+    }
 
     const { data } = responseDownload;
 
@@ -35,11 +41,11 @@ export default ({ database, DataScraper }) => {
     const updated = moment(lastModified, 'YYYY-MM-DDThh:mm:ss.SSSSZ').unix();
 
     results.push({
-      url: content,
-      updated,
-      created,
-      description: snippet,
-      name: snippet,
+      url: content || '',
+      updated: updated || 0,
+      created: created || 0,
+      description: sanitizeDescriptionHtml || '',
+      name: snippet || '',
     });
 
     return results;

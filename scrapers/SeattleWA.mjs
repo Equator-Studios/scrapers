@@ -18,7 +18,11 @@ export default ({ database, DataScraper }) => {
     const { urls } = shapefile;
     const url = urls['application/zip'];
 
-    const sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
+    let sanitizeDescriptionHtml = '';
+
+    if (description) {
+      sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
+    }
 
     results.push({
       url,

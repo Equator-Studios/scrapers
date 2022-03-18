@@ -12,7 +12,11 @@ export default ({ database, DataScraper }) => {
 
     const description = response.description || '';
 
-    const sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
+    let sanitizeDescriptionHtml = '';
+
+    if (description) {
+      sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
+    }
 
     const url = `${baseUrl}/data`;
 
