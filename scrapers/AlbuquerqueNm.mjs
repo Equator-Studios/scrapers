@@ -15,8 +15,7 @@ export default ({ database, DataScraper }) => {
       const name = $(`.table > tbody > tr:nth-child(${index}) > th`).text();
       const description = $(`.table > tbody > tr:nth-child(${index}) > td:nth-child(2)`).text();
       const url =
-        $(`.table > tbody > tr:nth-child(${index}) > td:nth-child(4) a`).attr('href') ||
-        'Not available';
+        $(`.table > tbody > tr:nth-child(${index}) > td:nth-child(4) a`).attr('href') || '';
 
       return results.push({
         url,

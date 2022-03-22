@@ -44,7 +44,7 @@ export default ({ database, DataScraper }) => {
       url: content || '',
       updated: updated || 0,
       created: created || 0,
-      description: sanitizeDescriptionHtml || '',
+      description: sanitizeDescriptionHtml,
       name: snippet || '',
     });
 

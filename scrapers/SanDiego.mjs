@@ -2,10 +2,10 @@ import fetch from 'node-fetch';
 import moment from 'moment';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, 'FerndaleMi', async () => {
+  return DataScraper(database, 'SanDiego', async () => {
     const results = [];
     const baseUrl =
-      'https://opendata.arcgis.com/api/v3/datasets/ebc18573de2d4721b51a0fb9e3b68635_0';
+      'https://opendata.arcgis.com/api/v3/datasets/c2a97c7a8f4b42d280f8113765d9b635_0';
     const request = await fetch(baseUrl);
     const response = await request.json();
     const requestDownload = await fetch(`${baseUrl}/downloads`);
@@ -44,7 +44,7 @@ export default ({ database, DataScraper }) => {
       url: content || '',
       updated: updated || 0,
       created: created || 0,
-      description: sanitizeDescriptionHtml,
+      description: sanitizeDescriptionHtml || '',
       name: snippet || '',
     });
 

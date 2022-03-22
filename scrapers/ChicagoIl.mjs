@@ -42,11 +42,23 @@ export default ({ database, DataScraper }) => {
         default:
           break;
       }
+
+      let sanitizeDescriptionHtml = '';
+
+      if (description) {
+        sanitizeDescriptionHtml = description
+          .replace(/(<([^>]+)>)/gi, '')
+          .replace(/\t+/gi, '')
+          .replace(/\n+/gi, '')
+          .replace(/\s{2,}/g, ' ')
+          .trim();
+      }
+
       results.push({
         url,
         updated: viewLastModified,
         created: createdAt,
-        description,
+        description: sanitizeDescriptionHtml,
         name,
       });
     });

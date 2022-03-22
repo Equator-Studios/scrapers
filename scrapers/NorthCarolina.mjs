@@ -4,11 +4,11 @@ import moment from 'moment';
 import puppeteer from 'puppeteer';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, 'WashingtonDc', async () => {
+  return DataScraper(database, 'NorthCarolina', async () => {
     const results = [];
     const arcgisUrl = 'https://opendata.arcgis.com/api/v3/datasets';
-    const baseUrl = 'https://opendata.dc.gov';
-    const request = `${baseUrl}/search?collection=Dataset&q=parcels&type=feature%20layer`;
+    const baseUrl = 'https://www.nconemap.gov';
+    const request = `${baseUrl}/search?collection=Dataset&q=parcels`;
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
@@ -82,7 +82,7 @@ export default ({ database, DataScraper }) => {
 
       results.push({
         url: content || '',
-        updated,
+        updated: updated || 0,
         created: 0,
         description: '',
         name: '',
@@ -105,7 +105,12 @@ export default ({ database, DataScraper }) => {
       let sanitizeDescriptionHtml = '';
 
       if (description) {
-        sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
+        sanitizeDescriptionHtml = description
+          .replace(/(<([^>]+)>)/gi, '')
+          .replace(/\t+/gi, '')
+          .replace(/\n+/gi, '')
+          .replace(/\s{2,}/g, ' ')
+          .trim();
       }
 
       results[index].description = sanitizeDescriptionHtml;

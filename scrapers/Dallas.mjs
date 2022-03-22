@@ -2,12 +2,10 @@ import fetch from 'node-fetch';
 import cheerio from 'cheerio';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, 'SanFranciscoCa', async () => {
+  return DataScraper(database, 'Dallas', async () => {
     const results = [];
-    const baseUrl = 'https://data.sfgov.org';
-    const request = await fetch(
-      `${baseUrl}/browse?limit=1000&limitTo=datasets&q=parcels&sortBy=relevance`
-    );
+    const baseUrl = 'https://www.dallasopendata.com';
+    const request = await fetch(`${baseUrl}/browse?q=parcels&sortBy=relevance&limit=1000`);
     const response = await request.text();
     const $ = cheerio.load(response);
 
@@ -33,19 +31,7 @@ export default ({ database, DataScraper }) => {
 
     dataset.map(data => {
       const { id, createdAt, viewLastModified, description, name, viewType } = data;
-
-      let sanitizeDescriptionHtml = '';
-
-      if (description) {
-        sanitizeDescriptionHtml = description
-          .replace(/(<([^>]+)>)/gi, '')
-          .replace(/\t+/gi, '')
-          .replace(/\n+/gi, '')
-          .replace(/\s{2,}/g, ' ')
-          .trim();
-      }
-
-      let url = '';
+      let url = null;
       switch (viewType) {
         case 'geo':
           url = `${baseUrl}/api/geospatial/${id}?method=export&format=Shapefile`;
@@ -56,13 +42,15 @@ export default ({ database, DataScraper }) => {
         default:
           break;
       }
-      results.push({
-        url: url || '',
-        updated: viewLastModified || 0,
-        created: createdAt || 0,
-        description: sanitizeDescriptionHtml || '',
-        name: name || '',
-      });
+      if (url) {
+        results.push({
+          url,
+          updated: viewLastModified,
+          created: createdAt,
+          description: description || '',
+          name,
+        });
+      }
     });
 
     return results;

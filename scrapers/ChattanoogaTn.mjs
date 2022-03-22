@@ -55,7 +55,7 @@ export default ({ database, DataScraper }) => {
         url,
         updated: viewLastModified || 0,
         created: createdAt || 0,
-        description: sanitizeDescriptionHtml || '',
+        description: sanitizeDescriptionHtml,
         name: name || '',
       });
     });

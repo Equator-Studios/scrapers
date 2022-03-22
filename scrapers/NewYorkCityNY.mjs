@@ -10,11 +10,23 @@ export default ({ database, DataScraper }) => {
     const { blobId, createdAt, viewLastModified, description, name } = response;
     const url = `${baseUrl}/files/${blobId}`;
 
+    let sanitizeDescriptionHtml = '';
+
+    if (description) {
+      sanitizeDescriptionHtml = description
+        .replace(/(<([^>]+)>)/gi, '')
+        .replace(/\t+/gi, '')
+        .replace(/\n+/gi, '')
+        .replace(/\r+/gi, '')
+        .replace(/\s{2,}/g, ' ')
+        .trim();
+    }
+
     results.push({
       url,
       updated: viewLastModified,
       created: createdAt,
-      description,
+      description: sanitizeDescriptionHtml,
       name,
     });
 

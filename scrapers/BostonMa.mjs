@@ -105,7 +105,12 @@ export default ({ database, DataScraper }) => {
       let sanitizeDescriptionHtml = '';
 
       if (description) {
-        sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
+        sanitizeDescriptionHtml = description
+          .replace(/(<([^>]+)>)/gi, '')
+          .replace(/\t+/gi, '')
+          .replace(/\n+/gi, '')
+          .replace(/\s{2,}/g, ' ')
+          .trim();
       }
 
       results[index].description = sanitizeDescriptionHtml;
