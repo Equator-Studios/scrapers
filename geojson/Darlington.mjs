@@ -12,11 +12,11 @@ export default ({ database, DataScraper }) => {
 
     const baseUrl =
       'https://services5.arcgis.com/8FJikaProY6O3ncx/ArcGIS/rest/services/PARCELS/FeatureServer';
-
+    const dataUrl = `${baseUrl}/0`;
     const urls = [
       fetch(`${baseUrl}/info/itemInfo?f=json`),
-      fetch(`${baseUrl}/0?f=json`),
-      fetch(`${baseUrl}/0/query?where=1=1&returnIdsOnly=true&f=json`),
+      fetch(`${dataUrl}?f=json`),
+      fetch(`${dataUrl}/query?where=1=1&returnIdsOnly=true&f=json`),
     ];
 
     const [requestItemInfo, requestFields, requestObjectIds] = await Promise.all(urls);
@@ -27,8 +27,11 @@ export default ({ database, DataScraper }) => {
 
     const [{ name }] = fields.filter(obj => obj.type === 'esriFieldTypeOID') || [];
 
-    const lowerBoundId = objectIds[0];
-    const upperBoundId = objectIds[objectIds.length - 1];
+    const sortObjectIds = objectIds.sort((a, b) => {
+      return a - b;
+    });
+    const lowerBoundId = sortObjectIds[0];
+    const upperBoundId = sortObjectIds[objectIds.length - 1];
 
     const shapesfileOutput = process.cwd(); // output for generated shapefiles
     const shapesfile = `${shapesfileOutput}/${lowerBoundId}_${upperBoundId}.zip`; // using lower bound id amd upper bound id for shapefile naming convention
@@ -39,13 +42,11 @@ export default ({ database, DataScraper }) => {
       sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
     }
 
-    const agsStream = new AgsStream(`${baseUrl}/0`, {
-      where: `${name}>=${lowerBoundId} and ${upperBoundId}<=${37675}`,
+    const agsStream = new AgsStream(dataUrl, {
+      where: `${name}>=${lowerBoundId} and ${name}<=${upperBoundId}`,
     });
 
     const feature = [];
-
-    const start = Date.now();
 
     const geoJsonStream = () =>
       new Promise((resolve, reject) => {
@@ -56,13 +57,9 @@ export default ({ database, DataScraper }) => {
           });
         });
         agsStream.on('error', error => {
-          const stop = new Date();
-          console.log(`error elapsed time: ${(stop - start) / 1000} seconds`);
           reject(error);
         });
         agsStream.on('end', () => {
-          const stop = new Date();
-          console.log(`finish elapsed time: = ${(stop - start) / 1000} seconds`);
           resolve();
         });
       });
