@@ -10,14 +10,15 @@ export default ({ database, DataScraper }) => {
     const $ = cheerio.load(response);
     const links = $('a');
 
-    links.map((index, elem) => {
+    for (let index = 0; index < links.length; index++) {
+      const elem = links[index];
       const href = $(elem).attr('href');
       const text = $(elem).text();
 
       if (href !== undefined && href.match(/parcel/gi)) {
         const url = `${baseUrl}/${href}`;
         const [name, description] = text.trim().split('-');
-        return results.push({
+        results.push({
           url: encodeURI(url),
           updated: 0,
           created: 0,
@@ -25,7 +26,7 @@ export default ({ database, DataScraper }) => {
           name,
         });
       }
-    });
+    }
 
     return results;
   });

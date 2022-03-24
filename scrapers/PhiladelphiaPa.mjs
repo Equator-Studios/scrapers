@@ -16,12 +16,13 @@ export default ({ database, DataScraper }) => {
 
     const created = moment(date, 'MMMM D, YYYY, H').unix();
 
-    datasetResources.map((index, elem) => {
+    for (let index = 0; index < datasetResources.length; index++) {
+      const elem = datasetResources[index];
       const href = $(elem).find('a.heading').attr('href');
       const name = $(elem).find('a.heading').attr('title');
       const url = `${baseUrl}/${href}`;
       if (href !== undefined) {
-        return results.push({
+        results.push({
           url,
           updated: 0,
           created,
@@ -29,7 +30,7 @@ export default ({ database, DataScraper }) => {
           name,
         });
       }
-    });
+    }
 
     return results;
   });

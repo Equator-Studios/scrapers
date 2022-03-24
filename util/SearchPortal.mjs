@@ -26,14 +26,15 @@ export const searchportal = async ({ baseUrl }) => {
 
   const urls = [];
 
-  links.map((index, elem) => {
+  for (let index = 0; index < links.length; index++) {
+    const elem = links[index];
     const href = $(elem).attr('href');
     const hrefString = $(elem).text();
     const link = `${baseUrl}${href}`;
     if (hrefString.match(/parcel/gi)) {
       urls.push(link);
     }
-  });
+  }
 
   const fetchUrls = urls.map(request => fetch(request));
   const responses = await Promise.all(fetchUrls);
@@ -44,14 +45,15 @@ export const searchportal = async ({ baseUrl }) => {
   const arcgisIds = [];
   const arcgisUrls = [];
 
-  dataset.map(html => {
+  for (let index = 0; index < dataset.length; index++) {
+    const html = dataset[index];
     const $ = cheerio.load(html);
     const content = $('meta[name="twitter:image"]').attr('content');
     const [parts] = content.split('/info');
     const [base, id] = parts.split('items/');
     arcgisIds.push(`${arcgisUrl}/${id}`);
     arcgisUrls.push(`${arcgisUrl}/${id}/downloads`);
-  });
+  }
 
   const fetchArcgisUrls = arcgisUrls.map(request => fetch(request));
   const responsesArcgisUrls = await Promise.all(fetchArcgisUrls);
@@ -59,7 +61,8 @@ export const searchportal = async ({ baseUrl }) => {
   const requestsArcgisUrls = responsesArcgisUrls.map(request => request.json());
   const datasetArcgisUrl = await Promise.all(requestsArcgisUrls);
 
-  datasetArcgisUrl.map(item => {
+  for (let index = 0; index < datasetArcgisUrl.length; index++) {
+    const item = datasetArcgisUrl[index];
     const { data = [] } = item || {};
     const [shapesfile] = data.filter(item => {
       const {
@@ -90,7 +93,7 @@ export const searchportal = async ({ baseUrl }) => {
         name: '',
       });
     }
-  });
+  }
 
   const fetchArcgisIds = arcgisIds.map(request => fetch(request));
   const responsesArcgisIds = await Promise.all(fetchArcgisIds);
@@ -98,7 +101,8 @@ export const searchportal = async ({ baseUrl }) => {
   const requestsArcgisIds = responsesArcgisIds.map(request => request.json());
   const datasetArcgisIds = await Promise.all(requestsArcgisIds);
 
-  datasetArcgisIds.map((item, index) => {
+  for (let index = 0; index < datasetArcgisIds.length; index++) {
+    const item = datasetArcgisIds[index];
     const {
       data: {
         attributes: { description, created, snippet, name },
@@ -110,7 +114,7 @@ export const searchportal = async ({ baseUrl }) => {
       results[index].created = created || 0;
       results[index].name = snippet || name || '';
     }
-  });
+  }
 
   return results;
 };

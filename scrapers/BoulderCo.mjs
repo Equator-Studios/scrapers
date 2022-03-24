@@ -25,7 +25,8 @@ export default ({ database, DataScraper }) => {
 
     const links = $('a[data-cludo-result]');
 
-    links.map((index, elem) => {
+    for (let index = 0; index < links.length; index++) {
+      const elem = links[index];
       const href = $(elem).attr('href');
       const hrefString = $(elem).text();
       const link = `${baseUrl}${href}`;
@@ -39,7 +40,7 @@ export default ({ database, DataScraper }) => {
           name: hrefString || '',
         });
       }
-    });
+    }
 
     return results;
   });

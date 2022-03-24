@@ -43,7 +43,7 @@ export default ({ database, DataScraper }) => {
       const href = $(elem).children('a').attr('href');
       const hrefString = $(elem).text().trim();
       const url = `${baseUrl}/${href}`;
-      results.push({
+      return results.push({
         url,
         updated: 0,
         created: 0,

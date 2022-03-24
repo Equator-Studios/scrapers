@@ -25,7 +25,7 @@ export default ({ database, DataScraper }) => {
 
     const tableRow = $('#DatasetFilesListing > tbody > tr');
 
-    tableRow.map((index, elem) => {
+    for (let index = 0; index < tableRow.length; index++) {
       const name = $(`#DatasetFilesListing > tbody > tr:nth-child(${index}) > td:nth-child(1)`)
         .text()
         .trim();
@@ -48,7 +48,7 @@ export default ({ database, DataScraper }) => {
           name,
         });
       }
-    });
+    }
 
     return results;
   });

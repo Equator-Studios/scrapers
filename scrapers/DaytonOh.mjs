@@ -12,7 +12,8 @@ export default ({ database, DataScraper }) => {
 
     const tableRow = $('table:nth-child(4) > tbody > tr');
 
-    tableRow.map((index, elem) => {
+    for (let index = 0; index < tableRow.length; index++) {
+      const element = tableRow[index];
       const name = $(
         `table:nth-child(4) > tbody > tr:nth-child(${index}) > td:nth-child(1) > a`
       ).text();
@@ -34,7 +35,7 @@ export default ({ database, DataScraper }) => {
           name,
         });
       }
-    });
+    }
 
     return results;
   });

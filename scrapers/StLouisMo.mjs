@@ -24,9 +24,8 @@ export default ({ database, DataScraper }) => {
 
     const links = $('.js-data-distribution-direct');
 
-    const dataset = [];
-
-    links.map((index, elem) => {
+    for (let index = 0; index < links.length; index++) {
+      const elem = links[index];
       const title = $(elem).parent().siblings('a').text().trim();
       const href = $(elem).attr('href');
       const hrefString = $(elem).text();
@@ -55,7 +54,7 @@ export default ({ database, DataScraper }) => {
           name: title || '',
         });
       }
-    });
+    }
 
     return results;
   });

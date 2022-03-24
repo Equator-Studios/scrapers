@@ -11,7 +11,8 @@ export const browseportal = async ({ baseUrl }) => {
 
   const urls = [];
 
-  links.map((index, elem) => {
+  for (let index = 0; index < links.length; index++) {
+    const elem = links[index];
     const text = $(elem).text();
     const href = $(elem).attr('href');
 
@@ -19,7 +20,7 @@ export const browseportal = async ({ baseUrl }) => {
       const id = href.substring(href.lastIndexOf('/') + 1, href.length);
       urls.push(`${baseUrl}/api/views/${id}`);
     }
-  });
+  }
 
   const fetchUrls = urls.map(request => fetch(request));
   const responses = await Promise.all(fetchUrls);
@@ -27,7 +28,8 @@ export const browseportal = async ({ baseUrl }) => {
   const requests = responses.map(request => request.json());
   const dataset = await Promise.all(requests);
 
-  dataset.map(data => {
+  for (let index = 0; index < dataset.length; index++) {
+    const data = dataset[index];
     const { id, createdAt, viewLastModified, description, name, viewType } = data;
     let url = '';
     switch (viewType) {
@@ -48,7 +50,7 @@ export const browseportal = async ({ baseUrl }) => {
       description: description || '',
       name: name || '',
     });
-  });
+  }
 
   return results;
 };
