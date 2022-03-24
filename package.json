@@ -18,9 +18,7 @@
   },
   "homepage": "https://github.com/Equator-Studios/scrapers#readme",
   "dependencies": {
-    "ags-stream": "^2.1.0",
     "cheerio": "^1.0.0-rc.10",
-    "geojson2shp": "^0.5.0",
     "moment": "^2.29.1",
     "node-fetch": "^3.2.0",
     "puppeteer": "^13.5.1"
