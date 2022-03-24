@@ -4,9 +4,9 @@ export default ({ database, DataScraper }) => {
   return DataScraper(database, 'Charleston', async () => {
     const baseUrl =
       'https://gisccapps.charlestoncounty.org/arcgis/rest/services/GIS_VIEWER/Public_Search/MapServer';
-    const dataUrl = `${baseUrl}/4`;
+    const layerNumber = 4;
 
-    const results = await mapserver({ baseUrl, dataUrl });
+    const results = await mapserver({ baseUrl, layerNumber });
 
     return results;
   });

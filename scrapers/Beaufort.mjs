@@ -4,9 +4,9 @@ export default ({ database, DataScraper }) => {
   return DataScraper(database, 'Beaufort', async () => {
     const baseUrl =
       'https://gis.beaufortcountysc.gov/server/rest/services/ParcelsWithAssessorData/MapServer';
-    const dataUrl = `${baseUrl}/0`;
+    const layerNumber = 0;
 
-    const results = await mapserver({ baseUrl, dataUrl });
+    const results = await mapserver({ baseUrl, layerNumber });
 
     return results;
   });

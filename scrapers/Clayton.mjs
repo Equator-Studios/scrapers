@@ -4,9 +4,9 @@ export default ({ database, DataScraper }) => {
   return DataScraper(database, 'Clayton', async () => {
     const baseUrl =
       'https://weba.co.clayton.ga.us:5443/server/rest/services/PlanningZoning/ZoningData/MapServer';
-    const dataUrl = `${baseUrl}/5`;
+    const layerNumber = 5;
 
-    const results = await mapserver({ baseUrl, dataUrl });
+    const results = await mapserver({ baseUrl, layerNumber });
 
     return results;
   });

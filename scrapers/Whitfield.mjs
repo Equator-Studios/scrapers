@@ -4,9 +4,9 @@ export default ({ database, DataScraper }) => {
   return DataScraper(database, 'Whitfield', async () => {
     const baseUrl =
       'https://gis.whitfieldcountyga.com/server/rest/services/Parcels_and_Development/MapServer';
-    const dataUrl = `${baseUrl}/5`;
+    const layerNumber = 5;
 
-    const results = await mapserver({ baseUrl, dataUrl });
+    const results = await mapserver({ baseUrl, layerNumber });
 
     return results;
   });

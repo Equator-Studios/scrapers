@@ -4,9 +4,9 @@ export default ({ database, DataScraper }) => {
   return DataScraper(database, 'Horry', async () => {
     const baseUrl =
       'https://www.horrycounty.org/gisweb/rest/services/OpenData/Parcel_Geometry/MapServer';
-    const dataUrl = `${baseUrl}/0`;
+    const layerNumber = 0;
 
-    const results = await mapserver({ baseUrl, dataUrl });
+    const results = await mapserver({ baseUrl, layerNumber });
 
     return results;
   });

@@ -4,9 +4,9 @@ export default ({ database, DataScraper }) => {
   return DataScraper(database, 'VirginiaBeachVa', async () => {
     const baseUrl =
       'https://gismaps.vbgov.com/arcgis/rest/services/Basemaps/PropertyInformation/MapServer';
-    const dataUrl = `${baseUrl}/12`;
+    const layerNumber = 12;
 
-    const results = await mapserver({ baseUrl, dataUrl });
+    const results = await mapserver({ baseUrl, layerNumber });
 
     return results;
   });
