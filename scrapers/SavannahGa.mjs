@@ -1,8 +1,8 @@
 import { searchportal } from '../util/SearchPortal.mjs';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, 'ClevelandOh', async () => {
-    const baseUrl = 'https://data-cuyahoga.opendata.arcgis.com';
+  return DataScraper(database, 'SavannahGa', async () => {
+    const baseUrl = 'https://data-sagis.opendata.arcgis.com';
 
     const results = searchportal({ baseUrl });
 

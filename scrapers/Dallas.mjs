@@ -1,8 +1,8 @@
 import { browseportal } from '../util/BrowsePortal.mjs';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, 'ChicagoIl', async () => {
-    const baseUrl = 'https://datacatalog.cookcountyil.gov';
+  return DataScraper(database, 'Dallas', async () => {
+    const baseUrl = 'https://www.dallasopendata.com';
 
     const results = await browseportal({ baseUrl });
 

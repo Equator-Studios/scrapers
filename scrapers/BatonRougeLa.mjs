@@ -1,22 +1,11 @@
-import fetch from 'node-fetch';
+import apiview from '../util/ApiView.mjs';
 
 export default ({ database, DataScraper }) => {
   return DataScraper(database, 'BatonRougeLa', async () => {
-    const results = [];
-    const baseUrl = 'https://data.brla.gov/api/views/re5c-hrw9';
-    const request = await fetch(baseUrl);
-    const response = await request.json();
+    const baseUrl = 'https://data.brla.gov';
+    const id = 're5c-hrw9';
 
-    const { createdAt, viewLastModified, description, name } = response;
-    const url = `${baseUrl}/rows.csv?accessType=DOWNLOAD`;
-
-    results.push({
-      url,
-      updated: viewLastModified,
-      created: createdAt,
-      description,
-      name,
-    });
+    const results = await apiview({ baseUrl, id });
 
     return results;
   });

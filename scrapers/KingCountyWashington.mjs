@@ -1,9 +1,9 @@
 import apiview from '../util/ApiView.mjs';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, 'RichmondVa', async () => {
-    const baseUrl = 'https://data.richmondgov.com';
-    const id = 'b52i-7ygb';
+  return DataScraper(database, 'KingCountyWashington', async () => {
+    const baseUrl = 'https://data.kingcounty.gov';
+    const id = '5idm-g74e';
 
     const results = await apiview({ baseUrl, id });
 

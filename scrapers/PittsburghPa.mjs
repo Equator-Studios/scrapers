@@ -22,12 +22,13 @@ export default ({ database, DataScraper }) => {
     const created = moment(createdString, 'MMMM D, YYYY, hh:mm A').unix();
     const updated = moment(updatedString, 'MMMM D, YYYY, hh:mm A').unix();
 
-    datasetResources.map((index, elem) => {
+    for (let index = 0; index < datasetResources.length; index++) {
+      const elem = datasetResources[index];
       const href = $(elem).find('a.heading').attr('href');
       const name = $(elem).find('a.heading').attr('title');
       const url = `${baseUrl}/${href}`;
       if (href !== undefined) {
-        return results.push({
+        results.push({
           url,
           updated,
           created,
@@ -35,7 +36,7 @@ export default ({ database, DataScraper }) => {
           name,
         });
       }
-    });
+    }
 
     return results;
   });
