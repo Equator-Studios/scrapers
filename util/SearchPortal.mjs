@@ -2,6 +2,9 @@ import fetch from 'node-fetch';
 import cheerio from 'cheerio';
 import moment from 'moment';
 import puppeteer from 'puppeteer';
+// using puppeteer due to the the limitation of calling the https://opendata.arcgis.com/api/v3/search
+// API directly. Prior mention API requires a POST with a well-form request payload. Unable to determine
+// a generic/common request payload to make a successful POST.
 
 export const searchportal = async ({ baseUrl }) => {
   const results = [];
