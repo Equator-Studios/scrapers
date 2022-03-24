@@ -16,33 +16,12 @@ export default ({ database, DataScraper }) => {
         `#rpdetails > div > div.row.mx-0.py-3.mb-3.bg-gray-100.border.rounded > div.col-md-7 > div > a`
       ).attr('href') || '';
 
-    let sanitizeDescriptionHtml = '';
-    let sanitizeNameHtml = '';
-
-    if (description) {
-      sanitizeDescriptionHtml = description
-        .replace(/(<([^>]+)>)/gi, '')
-        .replace(/\t+/gi, '')
-        .replace(/\n+/gi, '')
-        .replace(/\s{2,}/g, ' ')
-        .trim();
-    }
-
-    if (name) {
-      sanitizeNameHtml = name
-        .replace(/(<([^>]+)>)/gi, '')
-        .replace(/\t+/gi, '')
-        .replace(/\n+/gi, '')
-        .replace(/\s{2,}/g, ' ')
-        .trim();
-    }
-
     results.push({
-      url: `${baseUrl}${url}`,
+      url: `${baseUrl}${url}` || '',
       updated: 0,
       created: 0,
-      description: sanitizeDescriptionHtml,
-      name: sanitizeNameHtml,
+      description: description || '',
+      name: name || '',
     });
 
     return results;

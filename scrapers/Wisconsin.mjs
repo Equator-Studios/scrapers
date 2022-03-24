@@ -28,20 +28,14 @@ export default ({ database, DataScraper }) => {
     tableRow.map((index, elem) => {
       const name = $(`.table > tbody > tr:nth-child(${index}) > th`).text();
       const description = $(`.survey-link-text`).text();
-      const sanitizeDescriptionHtml = description
-        .replace(/(<([^>]+)>)/gi, '')
-        .replace(/\t+/gi, '')
-        .replace(/\n+/gi, '')
-        .replace(/\s{2,}/g, ' ')
-        .trim();
-      const url =
-        $(`.table > tbody > tr:nth-child(${index}) > td:nth-child(2) a`).attr('href') ||
-        'Not available';
+
+      const url = $(`.table > tbody > tr:nth-child(${index}) > td:nth-child(2) a`).attr('href');
+
       return results.push({
-        url,
+        url: url || '',
         updated: 0,
         created: 0,
-        description: sanitizeDescriptionHtml || '',
+        description: description || '',
         name,
       });
     });

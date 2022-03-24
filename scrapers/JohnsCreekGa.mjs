@@ -1,32 +1,10 @@
-import fetch from 'node-fetch';
+import { sharing } from '../util/Sharing.mjs';
 
 export default ({ database, DataScraper }) => {
   return DataScraper(database, 'JohnsCreekGa', async () => {
-    const results = [];
-    const baseUrl =
-      'https://www.arcgis.com/sharing/rest/content/items/ccf7aa525143406da6e36f79e989b263';
-    const request = await fetch(`${baseUrl}/?f=json`);
-    const response = await request.json();
+    const id = 'ccf7aa525143406da6e36f79e989b263';
 
-    const { created, snippet, modified, name } = response;
-
-    const description = response.description || '';
-
-    let sanitizeDescriptionHtml = '';
-
-    if (description) {
-      sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
-    }
-
-    const url = `${baseUrl}/data`;
-
-    results.push({
-      url,
-      updated: modified,
-      created,
-      description: sanitizeDescriptionHtml,
-      name: snippet || name,
-    });
+    const results = await sharing({ id });
 
     return results;
   });

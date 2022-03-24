@@ -31,21 +31,11 @@ export default ({ database, DataScraper }) => {
       const link = `${baseUrl}${href}`;
       if (hrefString.match(/parcel/gi)) {
         const description = $(elem).parent().siblings('p').text().trim();
-        let sanitizeDescriptionHtml = '';
-
-        if (description) {
-          sanitizeDescriptionHtml = description
-            .replace(/(<([^>]+)>)/gi, '')
-            .replace(/\t+/gi, '')
-            .replace(/\n+/gi, '')
-            .replace(/\s{2,}/g, ' ')
-            .trim();
-        }
         results.push({
           url: link || '',
           updated: 0,
           created: 0,
-          description: sanitizeDescriptionHtml,
+          description: description || '',
           name: hrefString || '',
         });
       }

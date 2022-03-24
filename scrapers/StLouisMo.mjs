@@ -45,19 +45,14 @@ export default ({ database, DataScraper }) => {
       const updatedParts = updatedString.split(':');
       const updatedDate = updatedParts[updatedParts.length - 1];
       const updated = moment(updatedDate, 'MM/DD/YY').unix();
-      let sanitizeDescriptionHtml = '';
-
-      if (description) {
-        sanitizeDescriptionHtml = description.replace(/(<([^>]+)>)/gi, '');
-      }
 
       if (hrefString.match(/shapefile/gi)) {
         results.push({
-          url: href,
-          updated,
+          url: href || '',
+          updated: updated || 0,
           created: 0,
-          description: sanitizeDescriptionHtml,
-          name: title,
+          description: description || '',
+          name: title || '',
         });
       }
     });
