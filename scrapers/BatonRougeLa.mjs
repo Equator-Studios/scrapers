@@ -1,12 +1,12 @@
 import apiview from '../util/ApiView.mjs';
 
 export default ({ database, DataScraper }) => {
-  return DataScraper(database, 'BatonRougeLa', async () => {
-    const baseUrl = 'https://data.brla.gov';
-    const id = 're5c-hrw9';
+	return DataScraper(database, 'BatonRougeLa', async () => {
+		const baseUrl = 'https://data.brla.gov';
+		const id = 're5c-hrw9';
 
-    const results = await apiview({ baseUrl, id });
+		const results = await apiview({ baseUrl, id });
 
-    return results;
-  });
+		return results;
+	});
 };
