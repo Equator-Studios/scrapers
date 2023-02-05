@@ -12,12 +12,8 @@ export default ({ database, DataScraper }) => {
 
 		const datasetResources = $('#dataset-resources li');
 		const description = $('.notes p').text();
-		const createdString = $(
-			'section.additional-info > table > tbody > tr:nth-child(4) > td'
-		).text();
-		const updatedString = $(
-			'section.additional-info > table > tbody > tr:nth-child(5) > td'
-		).text();
+		const createdString = $('section.additional-info > table > tbody > tr:nth-child(4) > td').text();
+		const updatedString = $('section.additional-info > table > tbody > tr:nth-child(5) > td').text();
 
 		const created = moment(createdString, 'MMMM D, YYYY, hh:mm A').unix();
 		const updated = moment(updatedString, 'MMMM D, YYYY, hh:mm A').unix();
