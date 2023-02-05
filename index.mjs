@@ -89,20 +89,33 @@ const loadFolder = async folder => {
 		//validate the data
 		for (const entry of data) {
 			try {
-				if (typeof entry.updated !== 'number')
+				if (typeof entry.updated !== 'number') {
 					throw new Error('One or more entries returned did not have a valid updated entry');
-				if ('created' in entry && typeof entry.created !== 'number')
+				}
+
+				if ('created' in entry && typeof entry.created !== 'number') {
 					throw new Error('One or more entries returned did not have a valid created entry');
-				if (typeof entry.name !== 'string')
+				}
+
+				if (typeof entry.name !== 'string') {
 					throw new Error('One or more entries returned did not have a valid name');
-				if (typeof entry.url !== 'string')
+				}
+
+				if (typeof entry.url !== 'string') {
 					throw new Error('One or more entries returned did not have a valid url');
-				if ('description' in entry && typeof entry.description !== 'string')
+				}
+
+				if ('description' in entry && typeof entry.description !== 'string') {
 					throw new Error('One or more entries returned did not have a valid description');
-				if ('tags' in entry && !Array.isArray(entry.tags))
+				}
+
+				if ('tags' in entry && !Array.isArray(entry.tags)) {
 					throw new Error('the tags property must be an array');
-				if ('tags' in entry && tags.entry.find(e => typeof e !== 'string'))
+				}
+
+				if ('tags' in entry && tags.entry.find(e => typeof e !== 'string')) {
 					throw new Error('the tags property must be an array of strings');
+				}
 			} catch (e) {
 				console.log('Suspect data:', entry);
 
