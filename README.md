@@ -33,11 +33,19 @@ paramaters:
 
 Any new datascrapers should go into the scrapers folder. New scrapers shouldn't
 need to touch any code since scapers will automatically be registered and ran
-with the index.js testing script. As a bonus developer friendly feature, to
-avoid running other scrapers when the intention is to test a new one, a `test`
-folder can be made next to the existing `scrapers` folder and project will
-only load what is in the test folder if available. When creating the PR, make
-sure to move the finished scraper from the test folder into the scrapers folder.
+with the index.js testing script.
+
+To avoid running other scrapers when the intention is to test a new one, either
+a commandline argument can be used to only run a specific scraper of a given name.
+An example of running the testing script for the RedDeer scraper:
+```
+node index.mjs RedDeer
+```
+
+Additionally, a `test` folder can be made next to the existing `scrapers` folder
+and project will only load what is in the test folder if available. When creating
+the PR, make sure to move the finished scraper from the test folder into the
+scrapers folder.
 
 # Running the project
 

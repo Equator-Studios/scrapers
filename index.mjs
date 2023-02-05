@@ -71,8 +71,16 @@ const loadFolder = async folder => {
 		if (await loadFolder('scrapers')) break loaders;
 	}
 
+	let entries = scrapers;
+
+	let find = process.argv[2];
+	if (find) {
+		find = find.toLowerCase();
+		entries = entries.filter(({name}) => name.toLowerCase() === find);
+	}
+
 	//run all the scrapers
-	for (const { name, callback } of scrapers) {
+	for (const { name, callback } of entries) {
 		console.log('Running scraper:', name);
 		let data = await Promise.resolve(callback());
 
@@ -103,7 +111,7 @@ const loadFolder = async folder => {
 		}
 	}
 
-	if (scrapers.length) {
+	if (entries.length) {
 		process.exit(0);
 	} else {
 		console.error('Found no scrapers to run!');
