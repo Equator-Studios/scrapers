@@ -12,12 +12,12 @@ export default ({ database, DataScraper }) => {
 		// Convert the response to a JSON object
 		const catalogResult = await collectionsCatalogRequest.json();
 		// Extract the collection ids from the result
-		let collection_ids = catalogResult['results'];
+		let collectionIds = catalogResult['results'];
 
 		// Loop through each collection id
-		for (let i = 0; i < length(collection_ids); i++) {
+		for (let i = 0; i < 10; i++) {
 			// Get the current collection id
-			let collectionId = collection_ids[i]['collection_id'];
+			let collectionId = collectionIds[i]['collection_id'];
 			// Define the endpoint for the current collection
 			let collections = `collections/${collectionId}`;
 			// Define the endpoint for the resources associated with the current collection
