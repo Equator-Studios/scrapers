@@ -1,7 +1,7 @@
 import { dataset } from '../util/Dataset.mjs';
 
 export default ({ database, DataScraper }) => {
-	return DataScraper(database, 'ArcGIS', async () => {
+	return DataScraper(database, 'URLsForArcGIS', async () => {
         let results = [];
 
 		const ids = [//'b70198178ff44462b00c5b5c0012668d_0', //ArlingtonVa currently broken
