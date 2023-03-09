@@ -82,15 +82,7 @@ const loadFolder = async folder => {
 	//run all the scrapers
 	for (const { name, callback } of entries) {
 		console.log('Running scraper:', name);
-		let data
-		
-		try{
-			data = await Promise.resolve(callback());
-		}
-		catch{ //return errors for broken scrapers
-			data = [{updated: 0, url: 'null', created: 0, description: 'Error in scraper', name}]
-		}
-			
+		let data = await Promise.resolve(callback());
 
 		console.log(data);
 
