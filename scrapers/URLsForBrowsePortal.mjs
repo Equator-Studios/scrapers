@@ -13,7 +13,7 @@ export default ({ database, DataScraper }) => {
         'https://data.sfgov.org', //SanFranciscoCa
         ];
 
-        for (let i = baseUrls.length - 1; i < baseUrls.length; i++){
+        for (let i = 0; i < baseUrls.length; i++){
             let baseUrl = baseUrls[i]
             try{
                 results.push(...(await browseportal({baseUrl})))
