@@ -6,10 +6,10 @@ export default ({ database, DataScraper }) => {
 		const data = [];
 		const baseUrl = 'https://api.tnris.org/api/v1';
 		const catalouge = await fetch(`${baseUrl}/collections_catalog/`);
-		const catalougeData = await catalouge.json()
-		const datasets = catalougeData.results.map(dataset => dataset.collection_id)
+		const catalougeData = await catalouge.json();
+		const datasets = catalougeData.results.map(dataset => dataset.collection_id);
 		for (let i = 0 ; i < datasets.length; i++){ //forEach loops dont work with async
-			const id = datasets[i]
+			const id = datasets[i];
 			const collections = `collections/${id}`;
 			const resources = `resources?collection_id=${id}`;
 			const collectionsRequest = await fetch(`${baseUrl}/${collections}`);
