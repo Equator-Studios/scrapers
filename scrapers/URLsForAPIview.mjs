@@ -4,10 +4,7 @@ export default ({ database, DataScraper }) => {
 	return DataScraper(database, 'URLsForAPIview', async () => {
 		let results = [];
 
-		const baseUrls = [{ //AustinTx currently broken
-			baseUrl: 'https://data.austintexas.gov',
-			id: 'f5rm-df6x'
-		},
+		const baseUrls = [
 		{ //BatonRougeLa
 			baseUrl: 'https://data.brla.gov',
 			id: 're5c-hrw9'
@@ -35,12 +32,7 @@ export default ({ database, DataScraper }) => {
 		{ //SantaMonicaCa currently broken
 			baseUrl: 'https://data.smgov.net',
 			id: 'sa4y-7yah'
-		},
-		{ //SeattleWA currently broken
-			baseUrl: 'https://data.smgov.net',
-			id: 'r37k-i652'
-		}
-		];
+		}];
 
 		for (let i = 0; i < baseUrls.length; i++){
 			let baseUrl = baseUrls[i].baseUrl;
