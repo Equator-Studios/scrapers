@@ -4,8 +4,7 @@ export default ({ database, DataScraper }) => {
 	return DataScraper(database, 'URLsForAPIview', async () => {
 		let results = [];
 
-		const baseUrls = [
-		{ //BatonRougeLa
+		const baseUrls = [{ //BatonRougeLa
 			baseUrl: 'https://data.brla.gov',
 			id: 're5c-hrw9'
 		},
