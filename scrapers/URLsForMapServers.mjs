@@ -100,12 +100,7 @@ export default ({ database, DataScraper }) => {
 		for (let i = 0; i < baseUrls.length; i++){
 			let baseUrl = baseUrls[i].baseUrl;
 			let layerNumber = baseUrls[i].layerNumber;
-			try{
-				results.push(...(await mapserver({baseUrl, layerNumber})));
-			}
-			catch{
-				continue;
-			}
+			results.push(...(await mapserver({baseUrl, layerNumber}).catch(() => [])));
 		}
 		return results;
 	});

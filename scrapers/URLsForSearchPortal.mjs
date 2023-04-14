@@ -16,12 +16,7 @@ export default ({ database, DataScraper }) => {
 
 		for (let i = 0; i < baseUrls.length; i++){
 			let baseUrl = baseUrls[i];
-			try{
-				results.push(...(await searchportal({baseUrl})));
-			}
-			catch{
-				continue;
-			}
+			results.push(...(await searchportal({baseUrl}).catch(() => [])));
 		}
 		return results;
 	});

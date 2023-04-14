@@ -36,12 +36,7 @@ export default ({ database, DataScraper }) => {
 		for (let i = 0; i < baseUrls.length; i++){
 			let baseUrl = baseUrls[i].baseUrl;
 			let id = baseUrls[i].id;
-			try{
-				results.push(...(await apiview({baseUrl, id})));
-			}
-			catch{
-				continue;
-			}
+			results.push(...(await apiview({baseUrl, id}).catch(() => [])));
 		}
 		return results;
 	});

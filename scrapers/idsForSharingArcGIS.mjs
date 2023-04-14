@@ -11,12 +11,7 @@ export default ({ database, DataScraper }) => {
 
 		for (let i = 0; i < ids.length; i++){
 			let id = ids[i];
-			try{
-				results.push(...(await sharing({id})));
-			}
-			catch{
-				continue;
-			}
+			results.push(...(await sharing({id}).catch(() => [])));
 		}
 		return results;
 	});

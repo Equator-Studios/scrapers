@@ -27,12 +27,7 @@ export default ({ database, DataScraper }) => {
 
 		for (let i = 0; i < ids.length; i++){
 			let id = ids[i];
-			try{
-				results.push(...(await dataset({id})));
-			}
-			catch{
-				continue;
-			}
+			results.push(...(await dataset({id}).catch(() => [])));
 		}
 		return results;
 	});
